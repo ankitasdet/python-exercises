@@ -15,14 +15,18 @@ def get_lat_lon_by_city(CITY,STATE_CODE,COUNTRY):
     dict = {CITY: (response_json[0].get('lat'),response_json[0].get('lon'))}
     return dict
 
-def get_temp_by_lat_lon(LAT,LON):
+def get_temp_by_lat_lon(CITY,LAT,LON):
     limit = '1'
-    Temp_EndPoint = "/data/3.0/timemachine"
-    r1 = requests.get(Domain+Temp_EndPoint+"?lat="+str(LAT)+"&lon="+str(LON)+"&dt=1643803200&appid="+API_KEY)
+    Temp_EndPoint = "/data/2.5/weather"
+    r1 = requests.get(Domain+Temp_EndPoint+"?lat="+str(LAT)+"&lon="+str(LON)+"&appid="+API_KEY+"&units=metric")
     response_json=r1.json()
-    print(response_json)
+    main_info=response_json.get('main')
+    print("Today's Weather in %s is %s"%(CITY,response_json.get('weather')[0].get('description')))
+    print("It feels like %s Celsius in %s"%(main_info.get('feels_like'),CITY))
+    print("The pressure and humidity in %s  is %s Pa,%s %%"%(CITY,main_info.get('pressure'),main_info.get('humidity')))
+
 
 
 if __name__ == "__main__":
     lat_lon_dict = get_lat_lon_by_city('Boston','MA','USA')
-    get_temp_by_lat_lon(lat_lon_dict.get('Boston')[0],lat_lon_dict.get('Boston')[1])
+    get_temp_by_lat_lon('Boston',lat_lon_dict.get('Boston')[0],lat_lon_dict.get('Boston')[1])
