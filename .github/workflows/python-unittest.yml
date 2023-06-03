@@ -20,8 +20,9 @@ jobs:
       with:
         python-version: 3.11.3  # Replace 'x' with the desired Python version
         
-    # - name: Install dependencies
-    #   run: pip install -r requirements.txt  # Modify if your dependencies are listed elsewhere
+    - name: Install dependencies
+      working-directory: weatherApp
+      run: pip install -r requirements.txt  # Modify if your dependencies are listed elsewhere
       
     - name: Run unit tests
       working-directory: weatherApp
