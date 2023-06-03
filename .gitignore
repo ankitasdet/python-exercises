@@ -1,1 +1,42 @@
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# Logs
+*.log
+
+# Environment and virtualenv files
+.env
+venv/
+.env/
 basics/.env
+weatherApp/.env
+
+# Dependency directories
+# Exclude the directory where dependencies are installed
+# (e.g., 'pip install -r requirements.txt')
+# It may be named 'venv', 'env', or 'virtualenv' depending on the tool used
+# Adjust it to match your project's setup
+env/
+env.bak/
+env/
+venv/
+env/
+.virtualenv/
+
+# Development and runtime files
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+
+# IDE-specific files and directories
+# Add entries for other IDEs/editors you use (e.g., .vscode/, .idea/)
+.vscode/
+.idea/
+
+# macOS-specific files
+.DS_Store
