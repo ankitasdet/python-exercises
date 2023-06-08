@@ -29,3 +29,11 @@ jobs:
       run: python3 -m unittest weatherAppUnitTest.py 
       env:
         API_KEY: ${{ secrets.API_KEY}}
+
+    - name: Run unit tests for basics program
+      working-directory: basics
+      run: python3 -m unittest hello.py
+      
+
+
+
