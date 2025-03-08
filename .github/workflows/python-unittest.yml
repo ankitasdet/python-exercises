@@ -64,4 +64,72 @@ jobs:
           
       - name: Run unit tests for basics program
         working-directory: basics
-        run: python3 -m unittest hello.py
+        run: python3 -m unittest name: Python Unit Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      weatherApp: ${{ steps.filter.outputs.weatherApp }}
+      basics: ${{ steps.filter.outputs.basics }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            weatherApp:
+              - 'weatherApp/**'
+            basics:
+              - 'basics/**'
+
+  test_weatherApp:
+    needs: changes
+    if: ${{ needs.changes.outputs.weatherApp == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11.3
+          
+      - name: Install dependencies
+        working-directory: weatherApp
+        run: pip install -r requirements.txt
+        
+      - name: Run unit tests
+        working-directory: weatherApp
+        run: python3 -m unittest weatherAppUnitTest.py 
+        env:
+          API_KEY: ${{ secrets.API_KEY}}
+
+  test_basics:
+    needs: changes
+    if: ${{ needs.changes.outputs.basics == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11.3
+          
+      - name: Run unit tests for basics program
+        working-directory: basics
+        run: python3 -m unittest Add2noWithInput.py
+        
+
