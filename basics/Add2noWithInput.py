@@ -4,7 +4,7 @@ def add_two_numbers(number1, number2):
         num2 = int(number2)
         return num1 + num2
     except ValueError:
-        return "Invalid input. Please enter numeric values."
+        return "Invalid input. Please enter numeric values and change your input."
 
 # For interactive use
 def main():
