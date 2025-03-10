@@ -64,8 +64,7 @@ jobs:
           
       - name: Run unit tests for basics program
         working-directory: basics
-        run: python3 -m unittest Add2noWithInput.py
-        run: python3 -m unittest CheckNumIsPrime.py
+        run: python3 -m unittest Add2noWithInput.py;CheckNumIsPrime.py
 
         
 
